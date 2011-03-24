@@ -26,6 +26,8 @@ requires 'Catalyst::Plugin::Session';
 requires 'Catalyst::Plugin::Session::Store::FastMmap';
 requires 'Catalyst::Plugin::Session::State::Cookie';
 
+requires 'Catalyst::Authentication::Realm::SimpleDB';
+
 test_requires 'Test::More' => '0.88';
 catalyst;
 
