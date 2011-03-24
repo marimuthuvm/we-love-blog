@@ -29,7 +29,7 @@ $(document).ready(function(){
 <div id="header" class="container_12">
 	<div class="grid_4 redmond">
 		<div class="ui-state-default ui-corner-all" style="height:80px; text-align: center;">
-			<h1>Weblog</h1>
+			<h1>We Love Blog</h1>
 		</div>
 	</div>
 	<div class="grid_8 hot-sneaks">
@@ -44,14 +44,9 @@ $(document).ready(function(){
 	</div>
 </div>
 <div id="body" class="container_12 redmond">
-	<div class="grid_9" style="margin-top: 20px;">
+	<div class="grid_12" style="margin-top: 20px;">
 		<div class="ui-widget-content ui-corner-all" style="min-height:400px;">
 			[% content %]
-		</div>
-	</div>
-	<div class="grid_3" style="margin-top: 20px;">
-		<div class="ui-widget-content ui-corner-all" style="min-height:400px;">
-			[% sidebar %]
 		</div>
 	</div>
 </div>
