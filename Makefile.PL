@@ -14,6 +14,8 @@ requires 'Moose';
 requires 'namespace::autoclean';
 requires 'DBIx::Class';
 requires 'Catalyst::Model::DBIC::Schema';
+requires 'Catalyst::View::TT';
+requires 'Test::WWW::Mechanize::Catalyst';
 requires 'ok';
 requires 'SQL::Translator';
 requires 'Config::General'; # This should reflect the config file format you've chosen
