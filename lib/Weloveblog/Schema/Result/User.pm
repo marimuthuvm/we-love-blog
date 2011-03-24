@@ -4,13 +4,64 @@ use strict;
 use warnings;
 
 
-__PACKAGE__->table('user');
+
+=head1 NAME
+
+webgallery::Schema::Result::User
+
+=cut
+
+__PACKAGE__->table("users");
+
+=head1 ACCESSORS
+
+=head2 id
+
+data_type: 'integer'
+is_auto_increment: 1
+is_nullable: 0
+sequence: 'users_id_seq'
+
+=head2 username
+
+data_type: 'text'
+is_nullable: 1
+
+=head2 password
+
+data_type: 'text'
+is_nullable: 1
+
+=cut
+
 __PACKAGE__->add_columns(
-	userid   => { data_type => 'INTEGER', is_nullable => 0, },
-    username => { data_type => 'VARCHAR', is_nullable => 0, size => 255, },
-    password => { data_type => 'VARCHAR', is_nullable => 0, size => 255, },
-);
-__PACKAGE__->set_primary_key('userid');
+  "id",
+  {
+    data_type => "integer",
+    is_auto_increment => 1,
+    is_nullable => 0,
+    sequence => "users_id_seq",
+  },
+  "email" => {
+      data_type => "VARCHAR",
+      default_value => "",
+      is_nullable => 0,
+      size => 128
+  },
+  "username" => {
+      data_type => "VARCHAR",
+      default_value => "",
+      is_nullable => 0,
+      size => 128
+  },
+  "password" => {
+      data_type => "VARCHAR",
+      default_value => "",
+      is_nullable => 0,
+      size => 128
+  },
+  );
+__PACKAGE__->set_primary_key("id");
 
 1;
 

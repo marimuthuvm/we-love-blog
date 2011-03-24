@@ -34,28 +34,22 @@ sub index :Path :Args(0) {
 sub login :Global {
     my ( $self, $c ) = @_;
     
-    my $user = $c->request->params->{'username'};
-    my $pass = $c->request->params->{'password'};
-    
-    sub check {
-		my ($user, $pass) = @_;
-		if(($user eq 'blogger') && ($pass eq 'mypw')){
-			return 1;
-		}
-		else{
-			return 0;
-		}
-    };
-    
+    my $username = $c->request->params->{'username'};
+    my $password = $c->request->params->{'password'};
+       
     $c->stash(template => 'template/user/login.tt');
-
-    if($c->request->method eq 'POST'){
-    	if(check($user, $pass)){
-    		$c->stash(result => 'Logged in successful')
-    	}
-    }
-    else{
-    	$c->stash(result => 'Not post');
+    
+    if ($c->req->method eq 'POST') {
+    	# Attempt to log the user in
+		if ($c->authenticate({ username => $username,password => $password  } )) {
+			# If successful, then let them use the application
+			#$c->stash(error_msg => "OK.");
+			$c->response->body( 'OK' );
+		} 
+		else {
+			# Set an error message
+			$c->stash(error_msg => "Invalid username or password.");
+		}
     }
 }
 
