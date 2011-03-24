@@ -13,6 +13,7 @@ requires 'Catalyst::Action::RenderView';
 requires 'Moose';
 requires 'namespace::autoclean';
 requires 'DBIx::Class';
+requires 'Catalyst::Model::DBIC::Schema';
 requires 'ok';
 requires 'SQL::Translator';
 requires 'Config::General'; # This should reflect the config file format you've chosen
