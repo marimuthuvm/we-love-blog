@@ -6,13 +6,21 @@ use ok 'Test::WWW::Mechanize::Catalyst' => 'Weloveblog';
 
 ok( my $mech = Test::WWW::Mechanize::Catalyst->new, 'Created mech object' );
 
+#Test for successfully login
 $mech->get_ok( 'http://localhost:3000/user' );
-
 $mech->get_ok( 'http://localhost:3000/login');
-$mech->field('username', 'blogger');
-$mech->field('password', 'mypw');
+$mech->field('username', 'user');
+$mech->field('password', 'pass');
 $mech->submit_form_ok();
-$mech->content_contains('Logged in successful');
+$mech->content_contains('OK');
+
+#test for failed login
+$mech->get_ok( 'http://localhost:3000/user' );
+$mech->get_ok( 'http://localhost:3000/login');
+$mech->field('username', 'user1');
+$mech->field('password', 'pass1');
+$mech->submit_form_ok();
+$mech->content_contains('Invalid username or password');
 
 done_testing();
 
