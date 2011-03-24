@@ -47,7 +47,7 @@ sub login :Global {
 		}
     };
     
-    $c->stash(template => 'template/user/login.html');
+    $c->stash(template => 'template/user/login.tt');
 
     if($c->request->method eq 'POST'){
     	if(check($user, $pass)){
