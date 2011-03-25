@@ -1,0 +1,17 @@
+[% META title = 'Dashboard' %]
+
+<!-- Login form -->
+<form method="post" action="[% c.uri_for('/login') %]">
+  <table>
+    <tr>
+        <td>Dashboard for User</td>
+    </tr>
+    <tr>
+        <td>Username:[% c.user.username %] </td>
+        <td>Email:[% c.user.email %] </td>
+    </tr>
+
+  </table>
+<div class="login_desc">
+      <span class="error" styles="color:red;">[% error_msg %]</span>
+</div>
