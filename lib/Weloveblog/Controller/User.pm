@@ -27,7 +27,7 @@ sub index :Path :Args(0) {
     $c->response->body('Matched Weloveblog::Controller::User in User.');
 }
 
-=head2 index
+=head2 login
 
 =cut
 
@@ -43,14 +43,24 @@ sub login :Global {
     	# Attempt to log the user in
 		if ($c->authenticate({ username => $username,password => $password  } )) {
 			# If successful, then let them use the application
-			#$c->stash(error_msg => "OK.");
-			$c->response->body( 'OK' );
+			$c->response->redirect("/dashboard");
 		} 
 		else {
 			# Set an error message
 			$c->stash(error_msg => "Invalid username or password.");
 		}
     }
+}
+
+=head2 logout
+
+=cut        
+
+sub logout :Global {
+    my ( $self, $c ) = @_;
+    $c->logout;
+    # Send the user to the login page
+    $c->response->redirect($c->uri_for('/login'));
 }
 
 
