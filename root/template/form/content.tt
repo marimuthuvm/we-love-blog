@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+[% message %]
+[% c.req.method %]
+[% c.user.id %]
+<form action="" method="post">
+    <p>
+        <input type="text" name="title" />
+    </p>
+    <p>
+        <textarea name="content" rows="5" cols="80"></textarea>
+    </p>
+    <p>
+        <input type="submit" />
+    </p>
+</form>
+
+</body>
+</html>
