@@ -1,17 +1,19 @@
 [% META title = 'Dashboard' %]
-
-<!-- Login form -->
-<form method="post" action="[% c.uri_for('/login') %]">
-  <table>
+ Dashboard for User: [% c.user.username %]
+<br>  
+<table>
+    <tr><th>Title</th><th>Created</th><th>    </th></tr>
+    [% # Display each content in a table row %]
+    [% FOREACH content IN contents -%]
     <tr>
-        <td>Dashboard for User</td>
+        <td>[% content.title %]</td>
+        <td>[% content.created %]</td>
+        <td><a href="[% c.uri_for('/content/edit') %]">EDIT</a></td>
+        <td></td>
     </tr>
-    <tr>
-        <td>Username:[% c.user.username %] </td>
-        <td>Email:[% c.user.email %] </td>
-    </tr>
-
-  </table>
+    [% END -%]
+</table>
+<a href="[% c.uri_for('/content/create') %]">ADD</a>
 <div class="login_desc">
       <span class="error" styles="color:red;">[% error_msg %]</span>
 </div>

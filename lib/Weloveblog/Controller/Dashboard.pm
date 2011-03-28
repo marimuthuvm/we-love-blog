@@ -33,6 +33,7 @@ sub index :Path :Args(0) {
             return 0;
     }
     else {
+    	 $c->stash(contents => [$c->model('DB::Content')->all]);
     	 $c->stash(template => 'template/dashboard/index.tt');
     }
 
