@@ -38,6 +38,39 @@ sub index :Path :Args(0) {
 
 }
 
+=head1 NAME
+
+Weloveblog::Controller::Dashboard - Catalyst Controller
+
+=head1 DESCRIPTION
+
+Catalyst Controller.
+
+=head1 METHODS
+
+=cut
+
+
+=head2 index
+
+=cut
+
+sub post :Local :Args(0) {
+    my ( $self, $c ) = @_;
+    
+    $c->stash(template => 'template/form/content.tt');
+
+    if($c->req->method eq 'POST'){
+    	my $topic = $c->req->param('topic');
+    	my $content = $c->req->param('content');
+    	
+    }else{
+    	$c->stash(
+    	   message => 'Get',
+    	);
+    };
+}
+
 
 =head1 AUTHOR
 
