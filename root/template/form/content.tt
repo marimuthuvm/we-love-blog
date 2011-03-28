@@ -10,10 +10,10 @@
 [% c.user.id %]
 <form action="" method="post">
     <p>
-        <input type="text" name="topic" />
+        <input type="text" name="title" />
     </p>
     <p>
-        <textarea rows="5" cols="80"></textarea>
+        <textarea name="content" rows="5" cols="80"></textarea>
     </p>
     <p>
         <input type="submit" />

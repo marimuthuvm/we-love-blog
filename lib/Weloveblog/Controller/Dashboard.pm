@@ -61,9 +61,13 @@ sub post :Local :Args(0) {
     $c->stash(template => 'template/form/content.tt');
 
     if($c->req->method eq 'POST'){
-    	my $topic = $c->req->param('topic');
+    	my $title = $c->req->param('title');
     	my $content = $c->req->param('content');
-    	
+    	$c->model('DB::Content')->create({
+    		user_id => $c->user->id,
+    		title  => $title,
+    		content => $content,
+        });
     }else{
     	$c->stash(
     	   message => 'Get',
