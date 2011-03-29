@@ -28,9 +28,8 @@ The root page (/)
 
 sub index :Path :Args(0) {
     my ( $self, $c ) = @_;
-    $c->stash(
-        template => 'template/home.tt',
-    );
+    $c->response->redirect("/blog");
+
 }
 
 =head2 default

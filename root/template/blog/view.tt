@@ -1,0 +1,18 @@
+[% IF entry %]
+<div class="title">
+    <h3 class="entry-title">
+        [% entry.title %]
+    </h3>
+</div>
+<div class="content" id="content">
+    [% entry.content %]
+<div style="clear: both;"></div>
+</div>
+<div class="entry-author">
+    <h5 class="">Post by : [% entry.users.username %] <span>[% entry.created %]</span></h5>
+</div>
+[% ELSE %]
+<div class="error_msg">
+      <span class="error" styles="color:red;">[% error_msg %]</span>
+</div>
+[% END %]

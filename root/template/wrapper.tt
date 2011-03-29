@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Weblog</title>
+<title>[% title %]</title>
 <link rel="stylesheet" type="text/css" media="all" href="/static/960gs/reset.css" />
 <link rel="stylesheet" type="text/css" media="all" href="/static/960gs/text.css" />
 <link rel="stylesheet" type="text/css" media="all" href="/static/960gs/960.css" />

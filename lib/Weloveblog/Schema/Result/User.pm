@@ -63,5 +63,21 @@ __PACKAGE__->add_columns(
   );
 __PACKAGE__->set_primary_key("id");
 
+=head1 RELATIONS
+
+=head2 blogs_owner
+
+Type: has_many
+
+Related object: L<Weloveblog::Schema::Result::Content>
+
+=cut
+
+__PACKAGE__->has_many(
+    "blogs_owner",
+    "Weloveblog::Schema::Result::Content",
+    { "foreign.user_id" => "self.id" },
+);
+
 1;
 

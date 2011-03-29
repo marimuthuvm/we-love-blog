@@ -1,0 +1,23 @@
+<table>
+    [% # Display each content in a table row %]
+    [% FOREACH entry IN entries -%]
+    <tr>
+        <td>
+            <div class="title">
+                <a href="[% c.uri_for('/blog/' _ entry.id _ '/view') %]">
+                    <h3 class="entry-title">
+                        [% entry.title %]
+                    </h3>
+                </a>
+            </div>
+        <div class="content" id="content">
+            [% entry.content.substr(0,400) %]
+        <div style="clear: both;"></div>
+        </div>
+        <div class="entry-author">
+        <span>Post by : [% entry.users.username %] [% entry.created %]<a href="[% c.uri_for('/blog/' _ entry.id _ '/view') %]"> Read more </a></span>  
+        </div>
+        </td>    
+    </tr>
+    [% END -%]
+</table>

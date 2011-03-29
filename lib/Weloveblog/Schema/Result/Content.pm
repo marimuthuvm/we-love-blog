@@ -89,12 +89,12 @@ Related object: L<Weloveblog::Schema::Result::User>
 =cut
 
 __PACKAGE__->belongs_to(
-  "user",
+  "users",
   "Weloveblog::Schema::Result::User",
   { id => "user_id" },
   { is_deferrable => 1, on_delete => "CASCADE", on_update => "CASCADE" },
+  { join_type => "LEFT" },
 );
-
 
 # Created by DBIx::Class::Schema::Loader v0.07010 @ 2011-03-25 15:18:52
 # DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:f7A0tF1vJPlpSAxGhPJVpQ

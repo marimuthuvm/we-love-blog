@@ -17,16 +17,6 @@ Catalyst Controller.
 =cut
 
 
-=head2 index
-
-=cut
-
-sub index :Path :Args(0) {
-    my ( $self, $c ) = @_;
-
-    $c->response->body('Matched Weloveblog::Controller::User in User.');
-}
-
 =head2 login
 
 =cut
