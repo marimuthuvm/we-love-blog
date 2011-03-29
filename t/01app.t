@@ -5,6 +5,6 @@ use Test::More;
 
 BEGIN { use_ok 'Catalyst::Test', 'Weloveblog' }
 
-ok( request('/')->is_success, 'Request should succeed' );
+ok( request('/blog')->is_success, 'Request should succeed' );
 
 done_testing();

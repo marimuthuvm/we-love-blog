@@ -23,20 +23,9 @@ Catalyst Controller.
 
 sub index :Path :Args(0) {
     my ( $self, $c ) = @_;
-
-    if (!$c->user_exists) {
-            # Dump a log message to the development server debug output
-            $c->log->debug('***User not found, forwarding to /login');
-            # Redirect the user to the login page
-            $c->response->redirect($c->uri_for('/login'));
-            # Return 0 to cancel 'post-auto' processing and prevent use of application
-            return 0;
-    }
-    else {
-    	 $c->stash(contents => [$c->model('DB::Content')->all]);
-    	 $c->stash(template => 'template/dashboard/index.tt');
-    }
-
+    $c->forward('/user/validate_user');
+    $c->stash(contents => [$c->model('DB::Content')->all]);
+    $c->stash(template => 'template/dashboard/index.tt');
 }
 
 =head1 NAME

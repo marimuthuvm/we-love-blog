@@ -78,8 +78,9 @@ Create new blog
 
 =cut
 
-sub create : Chained('blog') PathPart('new') Args(0) {
-    my ( $self, $c ) = @_;    
+sub create : Chained('base') PathPart('new') Args(0) {
+    my ( $self, $c ) = @_;
+    $c->forward('/user/validate_user');
     $c->stash(template => 'template/form/content.tt');    
     if($c->req->method eq 'POST') {
         my $title = $c->req->param('title');
@@ -89,6 +90,7 @@ sub create : Chained('blog') PathPart('new') Args(0) {
             title  => $title,
             content => $content,
         });
+        $c->response->redirect($c->uri_for('/dashboard'));
     }
     else {
         $c->stash( message => 'Get');
@@ -104,6 +106,7 @@ Edit blog data
 
 sub edit : Chained('load_blog') PathPart('edit') Args(0) {
     my ($self, $c) = @_;
+    $c->forward('/user/validate_user');
     $c->stash(title=> 'Edit blog');
     $c->stash(template => 'template/blog/edit.tt');
 }
@@ -116,10 +119,10 @@ Delete blog entry
 
 sub delete : Chained('load_blog') PathPart('delete') Args(0) {
     my ($self, $c) = @_;
+    $c->forward('/user/validate_user');
     $c->stash(title=> 'Delete blog');
-    $c->stash(template => 'template/blog/edit.tt');
+    $c->stash(template => 'template/blog/delete.tt');
 }
-
 
 =head1 AUTHOR
 
