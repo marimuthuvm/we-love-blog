@@ -1,0 +1,31 @@
+
+<form action="" method="post">
+    <table>
+        
+        <tr>
+            <td>
+            </td>
+            <td>
+                Confirm to delete blog id [% entry.id %].
+            </td>
+        </tr>
+        <tr>
+            <td>
+                </br>
+                Blog Title :
+            </td>
+            <td>
+                </br>
+                [% entry.title %]               
+            </td>
+        </tr>
+        <tr>
+            <td>
+            </td>
+            <td>
+                </br>
+                <input type="submit" value="Delete" />
+            </td>
+        </tr>
+    </table>      
+</form>
