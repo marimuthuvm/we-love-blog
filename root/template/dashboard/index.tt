@@ -1,19 +1,28 @@
 [% META title = 'Dashboard' %]
+
  Dashboard for User: [% c.user.username %]
-<br>  
-<table>
-    <tr><th>Title</th><th>Created</th><th>    </th></tr>
-    [% # Display each content in a table row %]
-    [% FOREACH content IN contents -%]
-    <tr>
-        <td>[% content.title %]</td>
-        <td>[% content.created %]</td>
-        <td><a href="[% c.uri_for('/content/edit') %]">EDIT</a></td>
-        <td></td>
-    </tr>
-    [% END -%]
-</table>
-<a href="[% c.uri_for('/content/create') %]">ADD</a>
 <div class="login_desc">
-      <span class="error" styles="color:red;">[% error_msg %]</span>
+    <div class="error ui-state-error ui-corner-all" style="padding: 5px; display: inline-block;">Test error message[% error_msg %]</div>
 </div>
+<a class="ui-button ui-state-default ui-corner-all" style="padding: 5px; margin-top: 5px;" href="[% c.uri_for('/blog/new') %]">Add</a>
+<table>
+    <thead>
+        <tr>
+            <th class="ui-state-default" style="width:300px;">Title</th>
+            <th class="ui-state-default" style="width:150px;">Created</th>
+            <th class="ui-state-default" style="width:50px;">Edit</th>
+            <th class="ui-state-default" style="width:50px;">Delete</th>
+        </tr>
+    </thead>
+    <tbody>
+        [% # Display each content in a table row %]
+        [% FOREACH entry IN contents -%]
+        <tr>
+            <td><a target="_blank" href="[% c.uri_for('/blog/'_ entry.id _'/view') %]">[% entry.title %]</a></td>
+            <td>[% entry.created %]</td>
+            <td><a href="[% c.uri_for('/blog/'_ entry.id _'/edit') %]">Edit</a></td>
+            <td><a href="[% c.uri_for('/blog/'_ entry.id _'/delete') %]">Delete</a></td>
+        </tr>
+        [% END -%]
+    </tbody>
+</table>
