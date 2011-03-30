@@ -3,12 +3,18 @@
     <h3 class="entry-title" style="display: inline;">
         [% entry.title %]
     </h3>
-    <hr />
+    <hr style="margin-bottom: 0px;" />
+    <div class="entry-author" style="text-align: right;">
+        <h5 style="margin:0px;">Post by : [% entry.users.username %] , [% entry.created %]</h5>
+    </div>
+    <div>
+        <img src="/static/images/blog/view/qoute.png" />
+    </div>
     <div class="content" id="content">
         [% entry.content %]
     </div>
-    <div class="entry-author">
-        <h5 class="">Post by : [% entry.users.username %] <span>[% entry.created %]</span></h5>
+    <div style="text-align: right;">
+        <img src="/static/images/blog/view/qoute.png" />
     </div>
 </div>
 [% ELSE %]

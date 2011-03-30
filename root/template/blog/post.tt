@@ -2,7 +2,7 @@
     <table>
         <tr>
             <td>
-                Title   :
+                Title:
             </td>
             <td>
                 <input type="text" name="title" size="75" value="[% entry.title %]"/>
@@ -10,7 +10,7 @@
         </tr>
         <tr>
             <td>
-                Content    :
+                Content:
             </td>
             <td>
                 <textarea name="content" rows="10" cols="90">[% entry.content %]</textarea>              

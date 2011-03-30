@@ -28,40 +28,40 @@ $(document).ready(function(){
 <div id="header" class="container_12">
 	<div class="grid_4 redmond">
 		<div class="ui-state-default ui-corner-all" style="text-align: center;">
-			<h1>We Love Blog</h1>
+			<h1><a href="/">We Love Blog</a></h1>
 		</div>
 	</div>
 	<div class="grid_8 hot-sneaks">
 		<div>
 			<ul id="menu">
-			    [% IF c.user_exists %]
-				<li><a href="[% c.uri_for('/dashboard') %]">Dashboard</a></li>
-				[% END %]
-				<li><a href="[% c.uri_for('/blog') %]">Blog</a></li>
-				<li><a href="#">About us</a></li>
+                [% IF c.user_exists %]
+                <li><a href="[% c.uri_for('/dashboard') %]">Dashboard</a></li>
+                [% END %]
+                <li><a href="[% c.uri_for('/blog') %]">Blog</a></li>
+                <li><a href="#">About us</a></li>
                 [% IF c.user_exists %]
                 <li><a href="[% c.uri_for('/logout') %]">Logout</a></li>
-				[% END %]
+                [% END %]
             </ul>
         </div>
-	</div>
+    </div>
 </div>
 <div id="body" class="container_12">
-	<div class="grid_9 redmond" style="margin-top: 20px;">
-		<div style="min-height:400px;">
+    <div class="grid_9 redmond" style="margin-top: 20px;">
+        <div style="min-height:400px;">
         [% content %]
-		</div>
-	</div>
+        </div>
+    </div>
     <div class="grid_3 hot-sneaks" style="margin-top: 20px;">
         <div class="ui-widget-content ui-corner-all" style="min-height:400px;">
         </div>
     </div>
-   
+
 </div>
 <div id="footer" class="container_12">
-	<div class="grid_12 ui-state-default" style="height:100px; margin-top: 20px;">
-		[% footer %]
-	</div>
+    <div class="grid_12 ui-state-default" style="height:100px; margin-top: 20px;">
+        [% footer %]
+    </div>
 </div>
 </body>
 </html>
