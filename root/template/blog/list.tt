@@ -1,19 +1,24 @@
 [% # Display each content in a table row %]
 [% FOREACH entry IN entries -%]
 <div class="ui-widget-content ui-corner-all" style="margin-bottom:20px;">
-    <div class="title ui-widget-header ui-corner-br" style="display:inline-block;">
+    <div class="title ui-widget-header ui-corner-tl ui-corner-br" style="display:inline-block;">
         <a href="[% c.uri_for('/blog/' _ entry.id _ '/view') %]">
             <h3 class="entry-title" style="display: inline; padding:5px;">
                 [% entry.title %]
             </h3>
         </a>
     </div>
-    <div class="content" id="content">
+    <div class="content" id="content" style="padding: 10px;">
         [% entry.content.substr(0,400) %]
         <div style="clear: both;"></div>
     </div>
-    <div class="entry-author">
-        <span>Post by : [% entry.users.username %] [% entry.created %]<a href="[% c.uri_for('/blog/' _ entry.id _ '/view') %]"> Read more </a></span>  
+    <div>
+        <div class="ui-state-default ui-corner-bl ui-corner-tr" style="display: inline-block; padding:4px;">
+            <a href="[% c.uri_for('/blog/' _ entry.id _ '/view') %]"> Read more </a>
+        </div>
+        <div class="entry-author" style="display: inline-block; float:right;">
+            <span class="ui-state-highlight ui-corner-left" style="padding:4px;">Post by : [% entry.users.username %] [% entry.created %]</span>  
+        </div>
     </div>
 </div>
 [% END -%]

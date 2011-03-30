@@ -52,7 +52,7 @@ $(document).ready(function(){
         [% content %]
 		</div>
 	</div>
-    <div class="grid_3 redmond" style="margin-top: 20px;">
+    <div class="grid_3 hot-sneaks" style="margin-top: 20px;">
         <div class="ui-widget-content ui-corner-all" style="min-height:400px;">
         </div>
     </div>

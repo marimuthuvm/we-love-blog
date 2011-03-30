@@ -1,15 +1,15 @@
 [% IF entry %]
-<div class="title">
-    <h3 class="entry-title">
+<div>
+    <h3 class="entry-title" style="display: inline;">
         [% entry.title %]
     </h3>
-</div>
-<div class="content" id="content">
-    [% entry.content %]
-<div style="clear: both;"></div>
-</div>
-<div class="entry-author">
-    <h5 class="">Post by : [% entry.users.username %] <span>[% entry.created %]</span></h5>
+    <hr />
+    <div class="content" id="content">
+        [% entry.content %]
+    </div>
+    <div class="entry-author">
+        <h5 class="">Post by : [% entry.users.username %] <span>[% entry.created %]</span></h5>
+    </div>
 </div>
 [% ELSE %]
 <div class="error_msg">
