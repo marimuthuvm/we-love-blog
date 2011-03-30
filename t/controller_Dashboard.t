@@ -17,6 +17,6 @@ $mech->get_ok( 'http://localhost:3000/login');
 $mech->field('username', 'user');
 $mech->field('password', 'pass');
 $mech->submit_form_ok();
-$mech->content_contains('Dashboard for User');
+$mech->title_like( qr/Dashboard for/i );
 
 done_testing();

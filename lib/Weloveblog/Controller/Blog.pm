@@ -81,7 +81,7 @@ Create new blog
 sub create : Chained('base') PathPart('new') Args(0) {
     my ( $self, $c ) = @_;
     $c->forward('/user/validate_user');
-    $c->stash(template => 'template/form/content.tt');    
+    $c->stash(template => 'template/blog/post.tt');    
     if($c->req->method eq 'POST') {
         my $title = $c->req->param('title');
         my $content = $c->req->param('content');
@@ -93,7 +93,7 @@ sub create : Chained('base') PathPart('new') Args(0) {
         $c->response->redirect($c->uri_for('/dashboard'));
     }
     else {
-        $c->stash( message => 'Get');
+    	$c->stash(button_label=> 'Create');
         $c->stash(title=> 'Create new blog');
     };
 }
@@ -105,10 +105,22 @@ Edit blog data
 =cut
 
 sub edit : Chained('load_blog') PathPart('edit') Args(0) {
-    my ($self, $c) = @_;
+    my ( $self, $c ) = @_;
     $c->forward('/user/validate_user');
-    $c->stash(title=> 'Edit blog');
-    $c->stash(template => 'template/blog/edit.tt');
+        
+    if($c->req->method eq 'POST') {
+        my $title = $c->req->param('title');
+        my $content = $c->req->param('content');
+        $c->stash->{entry}->update({ title => $title,
+        	                       content => $content 
+        });
+        $c->response->redirect($c->uri_for('/dashboard'));
+    }
+    else {
+        $c->stash(title=> 'Edit blog');
+        $c->stash(button_label=> 'Edit');
+        $c->stash(template => 'template/blog/post.tt');
+    };   
 }
 
 =head2 delete
@@ -118,10 +130,17 @@ Delete blog entry
 =cut
 
 sub delete : Chained('load_blog') PathPart('delete') Args(0) {
-    my ($self, $c) = @_;
+    my ( $self, $c ) = @_;
     $c->forward('/user/validate_user');
-    $c->stash(title=> 'Delete blog');
-    $c->stash(template => 'template/blog/delete.tt');
+        
+    if($c->req->method eq 'POST') {
+        $c->stash->{entry}->delete;
+        $c->response->redirect($c->uri_for('/dashboard'));
+    }
+    else {
+        $c->stash(title=> 'Delete blog');
+        $c->stash(template => 'template/blog/delete.tt');
+    }; 
 }
 
 =head1 AUTHOR

@@ -34,9 +34,11 @@ $(document).ready(function(){
 	<div class="grid_8 hot-sneaks">
 		<div>
 			<ul id="menu">
-				<li><a href="#">Blog</a></li>
-				<li><a href="#">Blog</a></li>
-				<li><a href="#">Blog</a></li>
+			    [% IF c.user_exists %]
+				<li><a href="[% c.uri_for('/dashboard') %]">Dashboard</a></li>
+				[% END %]
+				<li><a href="[% c.uri_for('/blog') %]">Blog</a></li>
+				<li><a href="#">About us</a></li>
                 [% IF c.user_exists %]
                 <li><a href="[% c.uri_for('/logout') %]">Logout</a></li>
 				[% END %]

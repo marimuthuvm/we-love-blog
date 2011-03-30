@@ -1,0 +1,27 @@
+<form action="" method="post">
+    <table>
+        <tr>
+            <td>
+                Title   :
+            </td>
+            <td>
+                <input type="text" name="title" size="75" value="[% entry.title %]"/>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Content    :
+            </td>
+            <td>
+                <textarea name="content" rows="10" cols="90">[% entry.content %]</textarea>              
+            </td>
+        </tr>
+        <tr>
+            <td>
+            </td>
+            <td>
+                <input type="submit" value="[% button_label %]" />
+            </td>
+        </tr>
+    </table>      
+</form>
