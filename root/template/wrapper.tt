@@ -14,9 +14,8 @@
 #menu li {
 	padding: 5px;
 	margin:0px;
-	width: 100px;
 	list-style: none;
-	display: inline;
+	display: inline-block;
 }
 </style>
 <script type="text/javascript">
@@ -28,7 +27,7 @@ $(document).ready(function(){
 <body>
 <div id="header" class="container_12">
 	<div class="grid_4 redmond">
-		<div class="ui-state-default ui-corner-all" style="height:80px; text-align: center;">
+		<div class="ui-state-default ui-corner-all" style="text-align: center;">
 			<h1>We Love Blog</h1>
 		</div>
 	</div>
@@ -38,21 +37,26 @@ $(document).ready(function(){
 				<li><a href="#">Blog</a></li>
 				<li><a href="#">Blog</a></li>
 				<li><a href="#">Blog</a></li>
-				[% IF c.user_exists %]
-				<li><a href="[% c.uri_for('/logout') %]">Logout</a></li>
+                [% IF c.user_exists %]
+                <li><a href="[% c.uri_for('/logout') %]">Logout</a></li>
 				[% END %]
-			</ul>
-		</div>
+            </ul>
+        </div>
 	</div>
 </div>
-<div id="body" class="container_12 redmond">
-	<div class="grid_12" style="margin-top: 20px;">
-		<div class="ui-widget-content ui-corner-all" style="min-height:400px; padding:15px;">
-			[% content %]
+<div id="body" class="container_12">
+	<div class="grid_9 redmond" style="margin-top: 20px;">
+		<div style="min-height:400px;">
+        [% content %]
 		</div>
 	</div>
+    <div class="grid_3 redmond" style="margin-top: 20px;">
+        <div class="ui-widget-content ui-corner-all" style="min-height:400px;">
+        </div>
+    </div>
+   
 </div>
-<div id="footer" class="container_12 redmond">
+<div id="footer" class="container_12">
 	<div class="grid_12 ui-state-default" style="height:100px; margin-top: 20px;">
 		[% footer %]
 	</div>
