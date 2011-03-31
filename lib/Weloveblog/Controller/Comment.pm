@@ -32,14 +32,17 @@ Rigth now, for  capture id fro delete only,In future It will be easy for edit im
 
 =cut
 
-sub load_blog : Chained('base') PathPart('') CaptureArgs(1) {
+sub load_comment : Chained('base') PathPart('') CaptureArgs(1) {
     my ($self, $c, $id) = @_;
     my $comment = $c->model('DB::Comment')->find($id);  
-    if ( $comment) {
+    if ( defined $comment) {
         $c->stash(comment => $comment );
     } 
     else {
-        $c->response->redirect($c->uri_for('/blog/'.$c->stash->content_id.'/view'));             
+        $c->stash(template => 'template/blog/view.tt');
+        $c->stash(title=> 'No such comment found');
+        $c->stash( error_msg => "No such comment found" );
+        $c->detach;  
     }
 }
 
@@ -75,7 +78,7 @@ Rigth now, This function use get to sumit value,It will be change to use POST me
 
 =cut
 
-sub delete : Chained('load_blog') PathPart('delete') Args(0) {
+sub delete : Chained('load_comment') PathPart('delete') Args(0) {
     my ( $self, $c ) = @_;
     $c->forward('/user/validate_user');
     my $content_id = $c->stash->{comment}->content_id;
