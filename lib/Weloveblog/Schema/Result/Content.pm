@@ -96,9 +96,20 @@ __PACKAGE__->belongs_to(
   { join_type => "LEFT" },
 );
 
-# Created by DBIx::Class::Schema::Loader v0.07010 @ 2011-03-25 15:18:52
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:f7A0tF1vJPlpSAxGhPJVpQ
+=head1 RELATIONS
 
+=head2 comment_parent
 
-# You can replace this text with custom code or comments, and it will be preserved on regeneration
+Type: has_many
+
+Related object: L<Weloveblog::Schema::Result::Comment>
+
+=cut
+
+__PACKAGE__->has_many(
+    "comment_parent",
+    "Weloveblog::Schema::Result::Comment",
+    { "foreign.content_id" => "self.id" },
+);
+
 1;
