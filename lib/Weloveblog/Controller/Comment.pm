@@ -39,7 +39,7 @@ sub load_blog : Chained('base') PathPart('') CaptureArgs(1) {
         $c->stash(comment => $comment );
     } 
     else {
-        $c->response->redirect($c->uri_for('/blog/'.$c->stash->content_id.'view'));             
+        $c->response->redirect($c->uri_for('/blog/'.$c->stash->content_id.'/view'));             
     }
 }
 
@@ -55,15 +55,16 @@ sub create : Chained('base') PathPart('new') Args(0) {
     if($c->req->method eq 'POST') {        
         $c->model('DB::Comment')->create({
             name  => $c->req->param('name'),
-            comment => $c->req->param('comment'),
+            content_id => $content_id,
+            comment => $c->req->param('comment'),         
         });
-        $c->response->redirect($c->uri_for('/blog/'.$content_id.'view'));
+        $c->response->redirect($c->uri_for('/blog/'.$content_id.'/view'));
     }
     else {
     	# Dump a log message to the development server debug output
         $c->log->debug('***There are someone who trying to post comment by Get method***');
         #redirect to blog view page
-        $c->response->redirect($c->uri_for('/blog/'.$content_id.'view'));
+        $c->response->redirect($c->uri_for('/blog/'.$content_id.'/view'));
     };
 }
 
@@ -77,9 +78,10 @@ Rigth now, This function use get to sumit value,It will be change to use POST me
 sub delete : Chained('load_blog') PathPart('delete') Args(0) {
     my ( $self, $c ) = @_;
     $c->forward('/user/validate_user');
+    my $content_id = $c->stash->{comment}->content_id;
     #These group of code will be change to use POST method later
-    $c->stash->{entry}->delete;
-    $c->response->redirect($c->uri_for('/blog/'.$c->stash->content_id.'view'));
+    $c->stash->{comment}->delete;
+    $c->response->redirect($c->uri_for('/blog/'.$content_id.'/view'));
 }
 
 =head1 AUTHOR
