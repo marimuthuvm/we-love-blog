@@ -3,14 +3,29 @@
 <script type="text/javascript" src="/static/elrte/js/elrte.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){    
-    $(".elrte").elrte({
-        cssfiles: [
-            '/static/css/base.css',
-        ],
-        allowSource: false,
-        toolbar: 'tiny',
-        height: '150',
+    
+    $("#button-comment").button({
+        icons:{
+            primary: 'ui-icon-comment'
+        }
     });
+    
+    $("#button-comment").toggle(
+        function(){
+            $("#form-comment").show();
+            $(".elrte").elrte({
+                cssfiles: [
+                    '/static/css/base.css',
+                ],
+                allowSource: false,
+                toolbar: 'tiny',
+                height: '150',
+            });
+        },
+        function(){
+            $("#form-comment").hide();
+        }
+    )
     
     $("#button-submit").button({
         icons:{
@@ -44,7 +59,11 @@ $(document).ready(function(){
     </div>
 </div>
 
-<form id="form-comment" action="[% c.uri_for('/comment/new') %]" method="POST">
+<div style="text-align: right; margin-top:20px;">
+    <button id="button-comment">Comment</button>
+</div>
+
+<form id="form-comment" action="[% c.uri_for('/comment/new') %]" method="POST" style="display: none;">
     <input type="hidden" name="content_id" value="[% entry.id %]" />
     <p>
         <label for="name">Name: </label>
@@ -52,7 +71,7 @@ $(document).ready(function(){
     </p>
     <p>
         <label for="comment">Comment: </label>
-        <textarea class="elrte" rows="10" cols="90"></textarea>
+        <textarea name="comment" class="elrte" rows="10" cols="90"></textarea>
     </p>
     <p style="text-align: right;">
         <button id="button-submit" type="submit">Add Comment</button>
