@@ -69,11 +69,15 @@ View blog
 sub view : Chained('load_blog') PathPart('view') Args(0) {
     my ($self, $c) = @_;
     my $content_id = $c->stash->{entry}->id;
-    my $comments = $c->model('DB::Comment')->search({ content_id => $content_id })->all();
-    #my $comments = $c->model('DB::Comment')->find( content_id => $content_id );
-    $c->stash(comments=> $comments);
+    if(defined comments=> $c->model('DB::Comment')->search({ content_id => $content_id })->all()){
+        $c->stash(comments=> $c->model('DB::Comment')->search({ content_id => $content_id })->all());
+    };
     $c->stash(title=> 'View blog');
     $c->stash(template => 'template/blog/view.tt');
+    
+    if($c->user_exists) {
+        $c->flash->{content_id} = $content_id;
+    }
 }
 
 =head2 create
