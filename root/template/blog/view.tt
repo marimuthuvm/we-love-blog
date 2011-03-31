@@ -12,21 +12,12 @@ $(document).ready(function(){
         height: '150',
     });
     
-    $('#form-comment').css('display', 'none');
-    
     $("#button-submit").button({
         icons:{
             primary: 'ui-icon-check'
         }
     });
-    $("#button-comment").button({
-        icons:{
-            primary: 'ui-icon-comment'
-        }
-    })
-    $("#button-comment").click(function (){
-        $('#form-comment').toggle('blind');
-    });
+
     $(".button-delete").button({
         icons:{
             primary: 'ui-icon-circle-close'
@@ -52,9 +43,7 @@ $(document).ready(function(){
         <img src="/static/images/blog/view/qoute.png" />
     </div>
 </div>
-<div style="text-align: right; margin-top:20px;">
-    <button id="button-comment">Comment</button>
-</div>
+
 <form id="form-comment" action="" method="POST">
     <p>
         <label for="name">Name: </label>

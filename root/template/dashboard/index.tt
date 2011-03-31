@@ -2,7 +2,9 @@
 
  Dashboard for User: [% c.user.username %]
 <div class="login_desc">
-    <div class="error ui-state-error ui-corner-all" style="padding: 5px; display: inline-block;">Test error message[% error_msg %]</div>
+    [% IF error_msg %]
+    <div class="error ui-state-error ui-corner-all" style="padding: 5px; display: inline-block;">[% error_msg %]</div>
+    [% END %]
 </div>
 <a class="ui-button ui-state-default ui-corner-all" style="padding: 5px; margin-top: 5px;" href="[% c.uri_for('/blog/new') %]">Add</a>
 <table>
