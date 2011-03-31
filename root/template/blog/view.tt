@@ -44,7 +44,7 @@ $(document).ready(function(){
     </div>
 </div>
 
-<form id="form-comment" action="[% c.uri_for('comment/new') %]" method="POST">
+<form id="form-comment" action="[% c.uri_for('/comment/new') %]" method="POST">
     <input type="hidden" name="content_id" value="[% entry.id %]" />
     <p>
         <label for="name">Name: </label>
@@ -59,6 +59,7 @@ $(document).ready(function(){
     </p>
 </form>
 <hr />
+
 [% FOR comment IN comments -%]
 <div class="ui-widget-content ui-corner-all" style="padding:10px; margin-top:20px;">
     <div style="display: block;">
