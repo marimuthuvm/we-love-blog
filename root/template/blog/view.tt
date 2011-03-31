@@ -44,7 +44,8 @@ $(document).ready(function(){
     </div>
 </div>
 
-<form id="form-comment" action="" method="POST">
+<form id="form-comment" action="[% c.uri_for('comment/new') %]" method="POST">
+    <input type="hidden" name="content_id" value="[% entry.id %]" />
     <p>
         <label for="name">Name: </label>
         <input type="text" name="name" />
@@ -65,7 +66,7 @@ $(document).ready(function(){
             <strong>[% comment.name %]</strong> Says :
         </span>
         <span style="float:right; display: block;">
-            <button class="button-delete">Delete</button>
+            <a href="[% c.uri_for('/comment/' _ comment.id _ '/delete' ) %]"><button class="button-delete">Delete</button></a>
         </span>
     </div>
     <p style="margin-top:10px;">
