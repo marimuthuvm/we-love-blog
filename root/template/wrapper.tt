@@ -6,6 +6,8 @@
 <link rel="stylesheet" type="text/css" media="all" href="/static/960gs/reset.css" />
 <link rel="stylesheet" type="text/css" media="all" href="/static/960gs/text.css" />
 <link rel="stylesheet" type="text/css" media="all" href="/static/960gs/960.css" />
+<link rel="stylesheet" type="text/css" media="all" href="/static/960gs/text.css" />
+<link rel="stylesheet" type="text/css" media="all" href="/static/css/base.css" />
 <link rel="stylesheet" href="/static/jquery/css/redmond/jquery-ui-1.8.11.custom.css" />
 <link rel="stylesheet" href="/static/jquery/css/hot-sneaks/jquery-ui-1.8.11.custom.css" />
 <script type="text/javascript" src="/static/jquery/js/jquery-1.5.1.min.js"></script>
