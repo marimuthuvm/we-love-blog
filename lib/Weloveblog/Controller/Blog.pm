@@ -33,8 +33,7 @@ Temporary fiunction for list blog::  /blog,  May be insteaded with rootdirectory
 
 sub root :Chained("base") :PathPart("") :Args(0) {
     my ($self, $c) = @_;
-    $c->stash(entries => [$c->model('DB::Content')->all]);
-    #$c->stash(entries => [$c->model('DB')->resultset('Content')]);
+    $c->stash(entries => [$c->model('DB::Content')->search({}, {order_by => 'created DESC'})]);
     $c->stash(title=> 'List of Blog');
     $c->stash(template => 'template/blog/list.tt');
 }
@@ -69,7 +68,7 @@ View blog
 sub view : Chained('load_blog') PathPart('view') Args(0) {
     my ($self, $c) = @_;
     my $content_id = $c->stash->{entry}->id;
-    if(defined comments=> $c->model('DB::Comment')->search({ content_id => $content_id })->all()){
+    if(defined $c->model('DB::Comment')->search({ content_id => $content_id })->all()){
         $c->stash(comments=> [$c->model('DB::Comment')->search({ content_id => $content_id })->all]);
     };
     $c->stash(title=> 'View blog');
