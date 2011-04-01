@@ -3,12 +3,6 @@ package Weloveblog::Model::DB;
 use strict;
 use base 'Catalyst::Model::DBIC::Schema';
 
-__PACKAGE__->config(
-    schema_class => 'Weloveblog::Schema',
-    
-    
-);
-
 =head1 NAME
 
 Weloveblog::Model::DB - Catalyst DBIC Schema Model
