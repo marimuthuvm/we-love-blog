@@ -24,7 +24,7 @@ Catalyst Controller.
 sub index :Path :Args(0) {
     my ( $self, $c ) = @_;
     if($c->forward('/user/validate_user')) {
-    	$c->stash(title => 'Dashboard for : '.$c->user->username);
+    	$c->stash(title    => 'Dashboard for : '.$c->user->username);
         $c->stash(contents => [$c->model('DB::Content')->all]);
         $c->stash(template => 'template/dashboard/index.tt');
     }

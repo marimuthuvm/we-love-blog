@@ -42,6 +42,15 @@ ok($link = $mech->find_link( text => 'Title test 111 abc'));
 $mech->follow_link( text => 'Title test 111 abc');
 $mech->title_is( "View blog" );
 
+#submit comment
+$mech->field('name', 'Comment::Name abc');
+$mech->field('comment', 'Comment::Body abc');
+$mech->submit_form_ok();
+
+#ater submit comment , redirect to view blog page
+$mech->title_is( "View blog" );
+$mech->content_contains('Comment::Body abc');
+
 #Edit blog
 $link_url = $link->url();
 $link_url =~ s/view/edit/g;
@@ -52,6 +61,7 @@ $mech->field('title', 'Title test edit 222 xyz');
 $mech->field('content', 'Body test edit 222 xyz');
 $mech->submit_form_ok();
 $mech->find_link( text => 'Title test edit 222 xyz');
+
 
 #Deleted blog
 ok($link = $mech->find_link( text => 'Title test edit 222 xyz'));
