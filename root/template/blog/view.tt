@@ -1,4 +1,5 @@
 [% IF entry %]
+[% USE date %]
 <link rel="stylesheet" href="/static/elrte/css/elrte.min.css" type="text/css" media="screen" charset="utf-8">
 <script type="text/javascript" src="/static/elrte/js/elrte.min.js"></script>
 <script type="text/javascript">
@@ -32,26 +33,16 @@ $(document).ready(function(){
             primary: 'ui-icon-check'
         }
     });
-    $("#button-submit").click(
-        function(){
-        	if(jQuery.trim($("#name").val()).length == 0){
-        		alert('Please input your name');
-        		return false;
-        	}
-        	else {
-        		return true;
-        	}
-        }    		  
-    );
+
     $(".button-delete").button({
         icons:{
             primary: 'ui-icon-circle-close'
         } 
     });
 // </Add Button Style>
-    $("#form-comment").validate();
+
     $("#form-comment").submit(function(event){
-        event.preventDefault();
+        //event.preventDefault();
         var content = $('#textarea-comment').elrte('val');
         alert(content);
         if(content == '&nbsp;'){
@@ -67,7 +58,15 @@ $(document).ready(function(){
     </h3>
     <hr style="margin-bottom: 0px;" />
     <div class="entry-author" style="text-align: right;">
-        <h5 style="margin:0px;">Post by : [% entry.users.username %] , [% entry.created %]</h5>
+        <span>
+            Post by : [% entry.users.username %] ,
+        </span>
+        <span>
+            [% date.format(
+                time   = entry.created.iso,
+                format = '%A-%B-%y %H:%M',
+            )%]
+        </span>
     </div>
     <div>
         <img src="/static/images/blog/view/qoute.png" />
@@ -104,6 +103,13 @@ $(document).ready(function(){
     <div style="display: block;">
         <span>
             <strong>[% comment.name %]</strong> Says :
+        </span>
+        <span>
+            on
+            [% date.format(
+                time   = entry.created.iso,
+                format = '%A-%B-%y %H:%M',
+            )%]
         </span>
         [% IF c.user_exists %]
         <span style="float:right; display: block;">
