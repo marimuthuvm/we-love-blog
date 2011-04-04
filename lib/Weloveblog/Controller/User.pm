@@ -27,7 +27,7 @@ sub login :Global {
     my $username = $c->request->params->{'username'};
     my $password = $c->request->params->{'password'};
        
-    $c->stash(title => 'Login');
+    $c->stash(title    => 'Login');
     $c->stash(template => 'template/user/login.tt');
     
     if ($c->req->method eq 'POST') {

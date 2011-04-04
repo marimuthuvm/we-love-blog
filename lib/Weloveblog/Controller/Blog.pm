@@ -109,7 +109,7 @@ sub edit : Chained('load_blog') PathPart('edit') Args(0) {
     $c->forward('/user/validate_user');
         
     if($c->req->method eq 'POST') {
-        my $title = $c->req->param('title');
+        my $title   = $c->req->param('title');
         my $content = $c->req->param('content');
         $c->stash->{entry}->update({ title => $title,
         	                       content => $content 
@@ -153,7 +153,7 @@ sub delete_comment : Chained('load_blog') PathPart('delete_comment') Args(1) {
     my ( $self, $c, $id ) = @_;
     $c->forward('/user/validate_user');
     my $content_id = $c->stash->{entry}->id;
-    my $comment = $c->model('DB::Comment')->find($id); 
+    my $comment    = $c->model('DB::Comment')->find($id); 
     if ( $comment) {
         $comment->delete;
     } 
