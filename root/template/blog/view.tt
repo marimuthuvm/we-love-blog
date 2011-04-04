@@ -3,7 +3,7 @@
 <script type="text/javascript" src="/static/elrte/js/elrte.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){    
-    
+// <Add Button Style>
     $("#button-comment").button({
         icons:{
             primary: 'ui-icon-comment'
@@ -13,7 +13,7 @@ $(document).ready(function(){
     $("#button-comment").toggle(
         function(){
             $("#form-comment").show();
-            $(".elrte").elrte({
+            $("#textarea-comment").elrte({
                 cssfiles: [
                     '/static/css/base.css',
                 ],
@@ -38,6 +38,17 @@ $(document).ready(function(){
             primary: 'ui-icon-circle-close'
         } 
     });
+// </Add Button Style>
+    $("#form-comment").validate();
+    $("#form-comment").submit(function(event){
+        event.preventDefault();
+        var content = $('#textarea-comment').elrte('val');
+        alert(content);
+        if(content == '&nbsp;'){
+            alert('empty !!'); 
+        };
+    });
+
 });
 </script>
 <div>
@@ -67,11 +78,11 @@ $(document).ready(function(){
     <input type="hidden" name="content_id" value="[% entry.id %]" />
     <p>
         <label for="name">Name: </label>
-        <input type="text" name="name" />
+        <input type="text" name="name" class="required" />
     </p>
     <p>
         <label for="comment">Comment: </label>
-        <textarea name="comment" class="elrte" rows="10" cols="90"></textarea>
+        <textarea id="textarea-comment" name="comment" class="elrte required" rows="10" cols="90"></textarea>
     </p>
     <p style="text-align: right;">
         <button id="button-submit" type="submit">Add Comment</button>
