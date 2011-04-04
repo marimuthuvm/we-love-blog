@@ -32,7 +32,17 @@ $(document).ready(function(){
             primary: 'ui-icon-check'
         }
     });
-
+    $("#button-submit").click(
+        function(){
+        	if(jQuery.trim($("#name").val()).length == 0){
+        		alert('Please input your name');
+        		return false;
+        	}
+        	else {
+        		return true;
+        	}
+        }    		  
+    );
     $(".button-delete").button({
         icons:{
             primary: 'ui-icon-circle-close'
@@ -63,15 +73,14 @@ $(document).ready(function(){
     <button id="button-comment">Comment</button>
 </div>
 
-<form id="form-comment" action="[% c.uri_for('/comment/new') %]" method="POST" style="display: none;">
-    <input type="hidden" name="content_id" value="[% entry.id %]" />
+<form id="form-comment" action="[% c.uri_for('/blog/'_ entry.id _'/new_comment') %]" method="POST" style="display: none;">
     <p>
         <label for="name">Name: </label>
-        <input type="text" name="name" />
+        <input type="text" name="name" id="name" />
     </p>
     <p>
         <label for="comment">Comment: </label>
-        <textarea name="comment" class="elrte" rows="10" cols="90"></textarea>
+        <textarea name="comment" id ="comment" class="elrte" rows="10" cols="90"></textarea>
     </p>
     <p style="text-align: right;">
         <button id="button-submit" type="submit">Add Comment</button>
@@ -87,7 +96,7 @@ $(document).ready(function(){
         </span>
         [% IF c.user_exists %]
         <span style="float:right; display: block;">
-            <a href="[% c.uri_for('/comment/' _ comment.id _ '/delete' ) %]"><button class="button-delete">Delete</button></a>
+            <a href="[% c.uri_for('/blog/' _ entry.id _ '/delete_comment/'_ comment.id ) %]"><button class="button-delete">Delete</button></a>
         </span>
         [% END %]
     </div>

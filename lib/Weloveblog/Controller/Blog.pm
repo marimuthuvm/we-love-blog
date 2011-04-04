@@ -73,7 +73,6 @@ sub view : Chained('load_blog') PathPart('view') Args(0) {
     $c->stash(template => 'template/blog/view.tt');
 }
 
-
 =head2 create
 
 Create new blog
@@ -142,6 +141,48 @@ sub delete : Chained('load_blog') PathPart('delete') Args(0) {
         $c->stash(title    => 'Delete blog');
         $c->stash(template => 'template/blog/delete.tt');
     }; 
+}
+
+=head2 delete_comment
+
+delete comment
+
+=cut
+
+sub delete_comment : Chained('load_blog') PathPart('delete_comment') Args(1) {
+    my ( $self, $c, $id ) = @_;
+    $c->forward('/user/validate_user');
+    my $content_id = $c->stash->{entry}->id;
+    my $comment = $c->model('DB::Comment')->find($id); 
+    if ( $comment) {
+        $comment->delete;
+    } 
+    $c->response->redirect($c->uri_for('/blog/'.$content_id.'/view'));
+}
+
+=head2 new_comment
+
+Create  new comment
+
+=cut
+
+sub new_comment : Chained('load_blog') PathPart('new_comment') Args(0) {
+    my ( $self, $c ) = @_;
+    my $content_id = $c->stash->{entry}->id;
+    if($c->req->method eq 'POST') {        
+        $c->model('DB::Comment')->create({
+            name       => $c->req->param('name'),
+            content_id => $content_id,
+            comment    => $c->req->param('comment'),         
+        });
+        $c->response->redirect($c->uri_for('/blog/'.$content_id.'/view'));
+    }
+    else {
+        # Dump a log message to the development server debug output
+        $c->log->debug('***There are someone who trying to post comment by Get method***');
+        #redirect to blog view page
+        $c->response->redirect($c->uri_for('/blog/'.$content_id.'/view'));
+    };
 }
 
 =head1 AUTHOR
