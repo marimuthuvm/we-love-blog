@@ -39,9 +39,9 @@ sub load_comment : Chained('base') PathPart('') CaptureArgs(1) {
         $c->stash(comment => $comment );
     } 
     else {
-        $c->stash(template => 'template/blog/view.tt');
-        $c->stash(title=> 'No such comment found');
-        $c->stash( error_msg => "No such comment found" );
+        $c->stash(template  => 'template/blog/view.tt');
+        $c->stash(title     => 'No such comment found');
+        $c->stash(error_msg => "No such comment found" );
         $c->detach;  
     }
 }
@@ -57,9 +57,9 @@ sub create : Chained('base') PathPart('new') Args(0) {
     my $content_id = $c->req->param('content_id');
     if($c->req->method eq 'POST') {        
         $c->model('DB::Comment')->create({
-            name  => $c->req->param('name'),
+            name       => $c->req->param('name'),
             content_id => $content_id,
-            comment => $c->req->param('comment'),         
+            comment    => $c->req->param('comment'),         
         });
         $c->response->redirect($c->uri_for('/blog/'.$content_id.'/view'));
     }

@@ -71,7 +71,6 @@ __PACKAGE__->belongs_to(
   "Weloveblog::Schema::Result::Content",
   { id => "content_id" },
   { is_deferrable => 1, on_delete => "CASCADE", on_update => "CASCADE" },
-  { join_type => "LEFT" },
 );
 
 1;

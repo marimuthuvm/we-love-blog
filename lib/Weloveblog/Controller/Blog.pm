@@ -33,8 +33,10 @@ Temporary fiunction for list blog::  /blog,  May be insteaded with rootdirectory
 
 sub root :Chained("base") :PathPart("") :Args(0) {
     my ($self, $c) = @_;
-    $c->stash(entries => [$c->model('DB::Content')->search({}, {order_by => 'created DESC'})]);
-    $c->stash(title=> 'List of Blog');
+    my $page = $c->request->params->{'page'};
+    my $rows = $c->request->params->{'rows'};
+    $c->stash(entries  => [$c->model('DB::Content')->list_page($page,$rows)]);
+    $c->stash(title    => 'List of Blog');
     $c->stash(template => 'template/blog/list.tt');
 }
 
@@ -52,9 +54,9 @@ sub load_blog : Chained('base') PathPart('') CaptureArgs(1) {
         $c->stash(entry => $entry );
     } 
     else {
-        $c->stash(template => 'template/blog/view.tt');
-        $c->stash(title=> 'No such blog found');
-        $c->stash( error_msg => "No such blog found" );
+        $c->stash(template  => 'template/blog/view.tt');
+        $c->stash(title     => 'No such blog found');
+        $c->stash(error_msg => "No such blog found" );
         $c->detach;        
     }
 }
@@ -67,14 +69,10 @@ View blog
 
 sub view : Chained('load_blog') PathPart('view') Args(0) {
     my ($self, $c) = @_;
-    my $content_id = $c->stash->{entry}->id;
-    if(defined $c->model('DB::Comment')->search({ content_id => $content_id })->all()){
-        $c->stash(comments=> [$c->model('DB::Comment')->search({ content_id => $content_id })->all]);
-    };
-    $c->stash(title=> 'View blog');
+    $c->stash(title    => 'View blog');
     $c->stash(template => 'template/blog/view.tt');
-
 }
+
 
 =head2 create
 
@@ -87,18 +85,17 @@ sub create : Chained('base') PathPart('new') Args(0) {
     $c->forward('/user/validate_user');
     $c->stash(template => 'template/blog/post.tt');    
     if($c->req->method eq 'POST') {
-        my $title = $c->req->param('title');
+        my $title   = $c->req->param('title');
         my $content = $c->req->param('content');
         $c->model('DB::Content')->create({
             user_id => $c->user->id,
-            title  => $title,
+            title   => $title,
             content => $content,
         });
         $c->response->redirect($c->uri_for('/dashboard'));
     }
     else {
-    	$c->stash(button_label=> 'Create');
-        $c->stash(title=> 'Create new blog');
+    	$c->stash(button_label => 'Create', title => 'Create new blog');
     };
 }
 
@@ -121,9 +118,9 @@ sub edit : Chained('load_blog') PathPart('edit') Args(0) {
         $c->response->redirect($c->uri_for('/dashboard'));
     }
     else {
-        $c->stash(title=> 'Edit blog');
-        $c->stash(button_label=> 'Edit');
-        $c->stash(template => 'template/blog/post.tt');
+        $c->stash(title        => 'Edit blog');
+        $c->stash(button_label => 'Edit');
+        $c->stash(template     => 'template/blog/post.tt');
     };   
 }
 
@@ -142,7 +139,7 @@ sub delete : Chained('load_blog') PathPart('delete') Args(0) {
         $c->response->redirect($c->uri_for('/dashboard'));
     }
     else {
-        $c->stash(title=> 'Delete blog');
+        $c->stash(title    => 'Delete blog');
         $c->stash(template => 'template/blog/delete.tt');
     }; 
 }

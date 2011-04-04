@@ -38,7 +38,7 @@ sub login :Global {
 		} 
 		else {
 			# Set an error message
-			$c->stash(error_msg => 'Invalid username or password.');
+			$c->stash(error_msg => 'Invalid username or password.@ip:'.$c->request->address);
 		}
     }
 }
@@ -63,12 +63,12 @@ Standard 404 error page
 sub validate_user :Private {
     my ($self, $c) = @_;
     if (!$c->user_exists) {
-    # Dump a log message to the development server debug output
-    $c->log->debug('***User not found, forwarding to /login');
-    # Redirect the user to the login page
-    $c->response->redirect($c->uri_for('/login'));
-    # Return 0 to cancel 'post-auto' processing and prevent use of application
-    return 0; 
+        # Dump a log message to the development server debug output
+        $c->log->debug('***User not found, forwarding to /login');
+        # Redirect the user to the login page
+        $c->response->redirect($c->uri_for('/login'));
+        # Return 0 to cancel 'post-auto' processing and prevent use of application
+        return 0;
     }
     else {
         return 1;

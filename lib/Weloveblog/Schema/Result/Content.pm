@@ -107,7 +107,7 @@ Related object: L<Weloveblog::Schema::Result::Comment>
 =cut
 
 __PACKAGE__->has_many(
-    "comment_parent",
+    "comments",
     "Weloveblog::Schema::Result::Comment",
     { "foreign.content_id" => "self.id" },
 );
