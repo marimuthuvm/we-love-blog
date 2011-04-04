@@ -2,6 +2,7 @@
 [% USE date %]
 <link rel="stylesheet" href="/static/elrte/css/elrte.min.css" type="text/css" media="screen" charset="utf-8">
 <script type="text/javascript" src="/static/elrte/js/elrte.min.js"></script>
+<script type="text/javascript" src="/static/jquery-validate/jquery.validate.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){    
 // <Add Button Style>
@@ -41,13 +42,16 @@ $(document).ready(function(){
     });
 // </Add Button Style>
 
-    $("#form-comment").submit(function(event){
-        //event.preventDefault();
-        var content = $('#textarea-comment').elrte('val');
-        alert(content);
-        if(content == '&nbsp;'){
-            alert('empty !!'); 
-        };
+    $('#form-comment').validate({
+        debug: false,
+        submitHandler: function(form){
+        // do other stuff for a valid form
+            if($('textarea', form).val() == '&nbsp;'){
+                alert('Please Add some Comment');
+            }else{
+                form.submit();
+            };
+        }
     });
 
 });
