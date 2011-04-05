@@ -1,6 +1,9 @@
 package Weloveblog::Controller::Blog;
 use Moose;
 use namespace::autoclean;
+use strict;
+use warnings;
+
 
 BEGIN {extends 'Catalyst::Controller'; }
 
