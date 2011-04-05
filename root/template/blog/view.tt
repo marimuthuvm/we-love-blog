@@ -44,9 +44,8 @@ $(document).ready(function(){
 // </Add Button Style>
     $('#form-comment').submit(function(event){
         var content = $('#textarea-comment').elrte('val');
-        content = $.htmlClean(content);
         $('#form-comment > textarea').val(content);
-        if(content.length == 0){
+        if($.htmlClean(content).length == 0){ // use htmlClean for validate that content is not some kind of empty
             alert('Please leave some comment');
             return false;
         }

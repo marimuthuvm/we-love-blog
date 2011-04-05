@@ -14,9 +14,8 @@ $(document).ready(function(){
     $(".elrte").elrte(opts);
     $('#form-post').submit(function(event){
         var content = $('#textarea-content').elrte('val');
-        content = $.htmlClean(content);
         $('#form-post > textarea').val(content);
-        if(content.length == 0){
+        if($.htmlClean(content).length == 0){ // use htmlClean for validate that content is not some kind of empty
             alert('Please insert some content');
             return false;
         }
