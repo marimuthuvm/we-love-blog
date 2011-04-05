@@ -1,6 +1,7 @@
 <link rel="stylesheet" href="/static/elrte/css/elrte.min.css" type="text/css" media="screen" charset="utf-8">
 <script type="text/javascript" src="/static/elrte/js/elrte.min.js"></script>
 <script type="text/javascript" src="/static/jquery-validate/jquery.validate.min.js"></script>
+<script type="text/javascript" src="/static/jQuery.htmlClean/jquery.htmlClean-min.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
 	var opts = {
@@ -13,8 +14,9 @@ $(document).ready(function(){
     $(".elrte").elrte(opts);
     $('#form-post').submit(function(event){
         var content = $('#textarea-content').elrte('val');
+        content = $.htmlClean(content);
         $('#form-post > textarea').val(content);
-        if(content == '&nbsp;'){
+        if(content.length == 0){
             alert('Please insert some content');
             return false;
         }
