@@ -1,27 +1,40 @@
 [% # Display each content in a table row %]
-<script type="text/javascript">
-/*
-$(document).ready(function(){
-    var path = window.location.toString();
-    alert(path);
-});
-*/
-</script>
 [% USE page = Page(total, rows, current) %]
+<script type="text/javascript">
+$(document).ready(function(){
+    var rows = [% rows %]
+    $('#form-entry-per-page > select > option[value=' + rows + ']').attr('selected', 'selected');
+    $('#form-entry-per-page > select').change(function(){
+        $('#form-entry-per-page').submit();
+    });
+});
+</script>
 <div style="text-align: right; margin-bottom:10px;">
-    Page : <a href="?page=[% page.first_page %]&rows=[% rows %]">[% page.first_page %]</a> ...
-    [% IF page.previous_page %]
-        <a href="?page=[% page.previous_page %]&rows=[% rows %]"><</a>
-    [% ELSE %]
-        <
-    [% END %]
-    <a class="ui-state-active" href="?page=[% page.current_page %]&rows=[% rows %]" style="padding:0px 5px 0px 5px;">[% page.current_page %]</a>
-    [% IF page.next_page %]
-        <a href="?page=[% page.next_page %]&rows=[% rows %]">></a>
-    [% ELSE %]
-        >
-    [% END %] ...
-    <a href="?page=[% page.last_page %]&rows=[% rows %]">[% page.last_page %]</a>
+    Entries Per Page: 
+    <form id="form-entry-per-page" method="GET" style="display: inline-block;">
+        <input type="hidden" name="page" value="[% current %]" />
+        <select name="rows">
+            <option value="5">5</option>
+            <option value="10">10</option>
+            <option value="15">15</option>
+            <option value="20">20</option>
+        </select>
+    </form>
+    <span style="margin-left: 20px;">
+        Page : <a href="?page=[% page.first_page %]&rows=[% rows %]">First</a> ...
+        [% IF page.previous_page %]
+            <a href="?page=[% page.previous_page %]&rows=[% rows %]"><</a>
+        [% ELSE %]
+            <
+        [% END %]
+        <a class="ui-state-active" href="?page=[% page.current_page %]&rows=[% rows %]" style="padding:0px 5px 0px 5px;">[% page.current_page %]</a>
+        [% IF page.next_page %]
+            <a href="?page=[% page.next_page %]&rows=[% rows %]">></a>
+        [% ELSE %]
+            >
+        [% END %] ...
+        <a href="?page=[% page.last_page %]&rows=[% rows %]">Last</a>
+    </span>
 </div>
 [% FOREACH entry IN entries -%]
 <div class="ui-widget-content ui-corner-all" style="margin-bottom:20px;">
