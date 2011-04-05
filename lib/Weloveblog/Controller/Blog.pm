@@ -36,8 +36,11 @@ Temporary fiunction for list blog::  /blog,  May be insteaded with rootdirectory
 
 sub root :Chained("base") :PathPart("") :Args(0) {
     my ($self, $c) = @_;
-    my $page = $c->request->params->{'page'};
-    my $rows = $c->request->params->{'rows'};
+    my $page = $c->request->params->{'page'} || 1;
+    my $rows = $c->request->params->{'rows'} || 10;
+    $c->stash(total    => $c->model('DB::Content')->count());
+    $c->stash(rows     => $rows);
+    $c->stash(current  => $page);
     $c->stash(entries  => [$c->model('DB::Content')->list_page($page,$rows)]);
     $c->stash(title    => 'List of Blog');
     $c->stash(template => 'template/blog/list.tt');

@@ -1,4 +1,28 @@
 [% # Display each content in a table row %]
+<script type="text/javascript">
+/*
+$(document).ready(function(){
+    var path = window.location.toString();
+    alert(path);
+});
+*/
+</script>
+[% USE page = Page(total, rows, current) %]
+<div style="text-align: right; margin-bottom:10px;">
+    Page : <a href="?page=[% page.first_page %]&rows=[% rows %]">[% page.first_page %]</a> ...
+    [% IF page.previous_page %]
+        <a href="?page=[% page.previous_page %]&rows=[% rows %]"><</a>
+    [% ELSE %]
+        <
+    [% END %]
+    <a class="ui-state-active" href="?page=[% page.current_page %]&rows=[% rows %]" style="padding:0px 5px 0px 5px;">[% page.current_page %]</a>
+    [% IF page.next_page %]
+        <a href="?page=[% page.next_page %]&rows=[% rows %]">></a>
+    [% ELSE %]
+        >
+    [% END %] ...
+    <a href="?page=[% page.last_page %]&rows=[% rows %]">[% page.last_page %]</a>
+</div>
 [% FOREACH entry IN entries -%]
 <div class="ui-widget-content ui-corner-all" style="margin-bottom:20px;">
     <div class="title ui-widget-header ui-corner-tl ui-corner-br" style="display:inline-block;">
