@@ -41,20 +41,16 @@ $(document).ready(function(){
         } 
     });
 // </Add Button Style>
-    $('#form-comment').submit(function(){
+    $('#form-comment').submit(function(event){
         var content = $('#textarea-comment').elrte('val');
         $('#form-comment > textarea').val(content);
-        $('#form-comment').validate({
-            debug: false,
-            submitHandler: function(form){
-                // do other stuff for a valid form
-                if($('textarea', form).val() == '&nbsp;'){
-                    alert('Please Add some Comment');
-                }else{
-                    form.submit();
-                };
-            }
-        });
+        if(content == '&nbsp;'){
+            alert('Please leave some comment');
+            return false;
+        }
+        if(!($('#form-comment').valid())){
+            return false;
+        }
     });
 });
 </script>
