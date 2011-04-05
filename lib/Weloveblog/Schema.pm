@@ -1,5 +1,7 @@
 package Weloveblog::Schema;
 use base qw/DBIx::Class::Schema/;
+use strict;
+use warnings;
 
 =head1 NAME
 
