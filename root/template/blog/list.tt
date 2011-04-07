@@ -54,7 +54,7 @@ $(document).ready(function(){
             <a href="[% c.uri_for('/blog/' _ entry.id _ '/view') %]"> Read more </a>
         </div>
         <div class="entry-author" style="display: inline-block; float:right;">
-            <span class="ui-state-highlight ui-corner-left" style="padding:4px;">Post by : [% entry.users.username %] [% entry.created %]</span>  
+            <span class="ui-state-highlight ui-corner-left" style="padding:4px;">Post by : [% entry.users.username %] on [% entry.created.date %] [% entry.created.time %]</span>  
         </div>
     </div>
 </div>

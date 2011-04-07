@@ -65,10 +65,8 @@ $(document).ready(function(){
             Post by : [% entry.users.username %] ,
         </span>
         <span>
-            [% date.format(
-                time   = entry.created.iso,
-                format = '%A-%B-%y %H:%M',
-            )%]
+            [% entry.created.date %]
+            [% entry.created.time %]
         </span>
     </div>
     <div>
